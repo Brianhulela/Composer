@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">composer</string>
+    <string name="enter_note">New note</string>
+</resources>

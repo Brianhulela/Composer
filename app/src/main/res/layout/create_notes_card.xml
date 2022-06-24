@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createCardConstraintlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1B1B1B">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addNoteCardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></com.google.android.material.button.MaterialButton>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/discardNoteCardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Discard"
+        app:layout_constraintBottom_toBottomOf="@+id/addNoteCardButton"
+        app:layout_constraintEnd_toStartOf="@+id/addNoteCardButton"
+        app:layout_constraintTop_toTopOf="@+id/addNoteCardButton"></com.google.android.material.button.MaterialButton>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/addNoteCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createCardTitleEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Title"
+                android:inputType="textMultiLine|textCapSentences"
+                android:paddingStart="24dp"
+                android:paddingRight="24dp"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/createCardRecyclerview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/showColorPaletteRecyclerview">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/createCardRecyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createCardTitleEdittext" />
+
+            <ImageButton
+                android:id="@+id/createAddNoteButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="@+id/createCardRecyclerview"
+                app:layout_constraintTop_toBottomOf="@+id/createCardRecyclerview"
+                app:srcCompat="@drawable/ic_add_note" />
+
+            <ImageButton
+                android:id="@+id/colorPaletteImagebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                app:layout_constraintBottom_toTopOf="@+id/showColorPaletteRecyclerview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_palette" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/showColorPaletteRecyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/createCardTitleEdittext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/colorPaletteImagebutton">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
