@@ -64,18 +64,20 @@ public class ViewCardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Assign fragment layout to fragment
         idFromCardClick = getArguments().getString("id");
-
         return inflater.inflate(R.layout.view_note_fragment, container, false);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        // Update notesCard in AllNotesActivity when fragment is closed
         updateParent();
     }
 
     public void updateParent(){
+        // Updates the AllNotes activity card of any changes made while viewing the card
         if (((allNotesActivity.allNotes.size()-1) - notesCard.getPosition()) >= 0){
             String noteTitle = titleEdittext.getText().toString();
             notesCard.setTitle(noteTitle);
@@ -95,6 +97,7 @@ public class ViewCardFragment extends Fragment {
     }
 
     public void showColorPallete(){
+        // To show or close the color pallete when the pallete button is clicked
         if (palleteOpen){
             colorPalleteRecyclerview.setVisibility(View.VISIBLE);
         }else {
@@ -200,6 +203,7 @@ public class ViewCardFragment extends Fragment {
     }
 
     public void getData(){
+        // Searches all notesCards and finds the clicked notes card from idFromClick
         for (NotesCard nC : allNotesActivity.allNotes){
             if (nC.getId().equals(idFromCardClick)){
                 notesCard = nC;

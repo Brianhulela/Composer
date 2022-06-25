@@ -34,23 +34,33 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateNotesCardFragment extends Fragment {
-    // The onCreateView method is called when Fragment should create its View object hierarchy,
-    // either dynamically or via XML layout inflation.
-    FirebaseFirestore createNoteDatabase = FirebaseFirestore.getInstance();
-    NotesCard notesCard;
-    ArrayList<Note> allNewNotes = allNewNotes = new ArrayList<>();;
-    NoteAdapter adapter;
-    String noteTitle;
-    TextInputEditText titleEdittext;
+    // Fragment for creating a new notes card
+
+    // AllNotesActivity hosting the fragment
     AllNotesActivity allNotesActivity;
 
-    // For the color pallete
+    FirebaseFirestore createNoteDatabase = FirebaseFirestore.getInstance();
+
+    // List containing all the notes in card
+    ArrayList<Note> allNewNotes = new ArrayList<>();
+
+    // Fragment views
     ImageButton colorPalleteImagebutton;
+    TextInputEditText titleEdittext;
+    MaterialButton discardButton;
+    MaterialButton addButton;
+    ImageButton addNoteButton;
+
+    // Notes Recyclerview things
+    NoteAdapter adapter;
+    RecyclerView notesRecylerview;
+    LinearLayoutManager notesHorizontalLayoutManager;
+
+    // For the color pallete
     RecyclerView colorPalleteRecyclerview;
     boolean palleteOpen = false;
     String defaultColor = "#1B1B1B";
     ConstraintLayout createCardContainer;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -59,29 +69,53 @@ public class CreateNotesCardFragment extends Fragment {
     }
 
     public void showColorPallete(){
+        // To show or close the color pallete when the pallete button is clicked
         if (palleteOpen){
             colorPalleteRecyclerview.setVisibility(View.VISIBLE);
         }else {
             colorPalleteRecyclerview.setVisibility(View.GONE);
         }
-
     }
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
 
+        // Getting reference to AllNotesActivity hosting the fragment
         allNotesActivity = (AllNotesActivity) getActivity();
 
+        // Initialising the views in Fragment
+        createCardContainer = view.findViewById(R.id.createCardConstraintlayout);
+        titleEdittext = view.findViewById(R.id.createCardTitleEdittext);
+        colorPalleteImagebutton = view.findViewById(R.id.colorPaletteImagebutton);
+        discardButton = view.findViewById(R.id.discardNoteCardButton);
+        addButton = view.findViewById(R.id.addNoteCardButton);
+        addNoteButton = view.findViewById(R.id.createAddNoteButton);
+
+        // Updates all the changes made in AllNotesActivity before creating a new notesCard
         updateData();
 
-        titleEdittext = view.findViewById(R.id.createCardTitleEdittext);
+        // Setting up the recyclerview for the color pallete
+        colorPalleteRecyclerview = view.findViewById(R.id.showColorPaletteRecyclerview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        colorPalleteRecyclerview.setLayoutManager(linearLayoutManager);
+        ColorPaletteAdapter colorPaletteAdapter = new ColorPaletteAdapter(getContext(), createCardContainer);
+        colorPalleteRecyclerview.setAdapter(colorPaletteAdapter);
 
-        createCardContainer = view.findViewById(R.id.createCardConstraintlayout);
+        //Setting the background color of the create card layout
+        createCardContainer.setBackgroundColor(Color.parseColor(defaultColor));
 
-        colorPalleteImagebutton = view.findViewById(R.id.colorPaletteImagebutton);
+        //Setting up the notes RecyclerView
+        notesRecylerview = view.findViewById(R.id.createCardRecyclerview);
+        notesHorizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        notesRecylerview.setLayoutManager(notesHorizontalLayoutManager);
+        adapter = new NoteAdapter(allNewNotes, getContext());
+        // Allowing the dragging and rearranging of note functionality
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(notesRecylerview);
+        notesRecylerview.setAdapter(adapter);
+
+        // Shows or closes the color pallete
         colorPalleteImagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,36 +128,7 @@ public class CreateNotesCardFragment extends Fragment {
             }
         });
 
-
-        colorPalleteRecyclerview = view.findViewById(R.id.showColorPaletteRecyclerview);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        colorPalleteRecyclerview.setLayoutManager(linearLayoutManager);
-        ColorPaletteAdapter colorPaletteAdapter = new ColorPaletteAdapter(getContext(), createCardContainer);
-        colorPalleteRecyclerview.setAdapter(colorPaletteAdapter);
-
-        //Setting the background color of the create card layout
-        createCardContainer.setBackgroundColor(Color.parseColor(defaultColor));
-
-        MaterialButton discardButton = view.findViewById(R.id.discardNoteCardButton);
-        MaterialButton addButton = view.findViewById(R.id.addNoteCardButton);
-
-        //Setting up the RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.createCardRecyclerview);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-
-
-        adapter = new NoteAdapter(allNewNotes, getContext());
-
-        ItemTouchHelper.Callback callback =
-                new ItemMoveCallback(adapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView.setAdapter(adapter);
-
-        ImageButton addNoteButton = view.findViewById(R.id.createAddNoteButton);
+        // Make a new note
         addNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,13 +140,12 @@ public class CreateNotesCardFragment extends Fragment {
                         noteIndent = true;
                     }
                 }
-
-
                 allNewNotes.add(new Note("", false, position, noteIndent));
                 adapter.notifyItemInserted(allNewNotes.size()-1);
             }
         });
 
+        // Cancels notesCard creation
         discardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +156,7 @@ public class CreateNotesCardFragment extends Fragment {
             }
         });
 
+        // Add notescard to list of notesCards and firebase
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,12 +166,14 @@ public class CreateNotesCardFragment extends Fragment {
     }
 
     public void updateData() {
+        // Updates all the changes made in AllNotesActivity before creating a new notesCard
         for (NotesCard notesCard : allNotesActivity.allNotes){
             allNotesActivity.notesFirebaseHandler.updateCardInFirestore(notesCard);
         }
     }
 
     public void addNotesCard(){
+        // Adds the newly created notesCard to firebase
         String noteTitle = titleEdittext.getText().toString();
         List<Object> cardNotes = new ArrayList<>();
 
@@ -193,18 +200,12 @@ public class CreateNotesCardFragment extends Fragment {
         String hexColor = String.format("#%06X", (0xFFFFFF & color));
         notesCard.put("color", hexColor);
 
-
         // Add a new document with a generated ID
         createNoteDatabase.collection("Notes")
                 .add(notesCard)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        if(fm.getBackStackEntryCount()>0) {
-                            fm.popBackStack();
-                        }
-                        AllNotesActivity allNotesActivity  = (AllNotesActivity) getActivity();
                         allNotesActivity.notesFirebaseHandler.getDataFromFirestore();
                         Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
@@ -217,5 +218,11 @@ public class CreateNotesCardFragment extends Fragment {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+        // Close the fragment after adding to firebase
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        if(fm.getBackStackEntryCount()>0) {
+            fm.popBackStack();
+        }
     }
 }

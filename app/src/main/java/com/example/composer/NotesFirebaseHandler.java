@@ -40,8 +40,8 @@ public class NotesFirebaseHandler {
     RecyclerView recyclerView;
     Context context;
 
-
     public NotesFirebaseHandler(FragmentManager fragmentManager, Context context, ArrayList<NotesCard> allNotes, RecyclerView recyclerView, ShimmerFrameLayout shimmerFrameLayout, NotesCardsRecyclerAdapter notesCardsRecyclerAdapter){
+        // Constructor for NotesFirebaseHandler objects
         this.fragmentManager = fragmentManager;
         this.db = FirebaseFirestore.getInstance();
         this.allNotes = allNotes;
@@ -51,9 +51,8 @@ public class NotesFirebaseHandler {
         this.context = context;
     }
 
-    // Gets all the notes from firebase firestore;
     public void getDataFromFirestore() {
-
+        // Gets all the notes from firebase firestore;
         allNotes.clear();
         db.collection("Notes")
                 .get()
@@ -61,7 +60,6 @@ public class NotesFirebaseHandler {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
@@ -77,8 +75,8 @@ public class NotesFirebaseHandler {
                 });
     }
 
-    // Delete a NotesCard from firebase;
     public void deleteNotesCardFromFirestore(String idFromCardClick){
+        // Delete a NotesCard from firebase;
         db.collection("Notes").document(idFromCardClick)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -101,19 +99,18 @@ public class NotesFirebaseHandler {
                 });
     }
 
-    // Updates all the NotesCard data in firebase;
     public void updateData() {
+        // Updates all the NotesCard data in firebase;
         for (NotesCard notesCard : allNotes){
             updateCardInFirestore(notesCard);
         }
     }
 
-    // Updates individual NotesCard in firebase;
     public void updateCardInFirestore(NotesCard notesCard){
+        // Updates individual NotesCard in firebase;
         String noteTitle = notesCard.getTitle();
         String noteColor = notesCard.getColor();
         List<Object> cardNotes = new ArrayList<>();
-
 
         for (Note n : notesCard.getNotes()) {
             Map<String, String> note = new HashMap<>();
@@ -123,7 +120,6 @@ public class NotesFirebaseHandler {
             note.put("indent", String.valueOf(n.isIndent()));
             cardNotes.add(note);
         }
-
 
         Map<String, Object> cardToUpdate = new HashMap<>();
         cardToUpdate.put("title", noteTitle);
@@ -147,9 +143,8 @@ public class NotesFirebaseHandler {
                 });
     }
 
-    // Creates NotesCard objects from firebase data;
     public void processData(String id, QueryDocumentSnapshot document){
-
+        // Creates NotesCard objects from firebase data;
         Object positionLong = document.getData().get("position");
         int positionInt =  Math.toIntExact((Long) positionLong);
         NotesCard notesCard = new NotesCard(id, document.getData().get("title").toString(), positionInt, document.getData().get("color").toString());

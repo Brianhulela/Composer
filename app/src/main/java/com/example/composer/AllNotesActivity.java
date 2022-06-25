@@ -84,10 +84,12 @@ public class AllNotesActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        // Update firebase of all the changes made to notes during operation
         notesFirebaseHandler.updateData();
     }
 
     public void addNotesCard(View view){
+        //Opens the CreateNotesCardFragment() to create a new notesCard
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.allNotesLayout, new CreateNotesCardFragment());
         fragmentTransaction.addToBackStack(null);
