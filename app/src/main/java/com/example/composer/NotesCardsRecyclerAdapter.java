@@ -51,11 +51,6 @@ public class NotesCardsRecyclerAdapter extends RecyclerView.Adapter<NotesCardsRe
         NoteAdapter noteAdapter = new NoteAdapter(notesCard.getNotes(), context);
         holder.cardNotesRecyclerview.setAdapter(noteAdapter);
 
-        //Setting the background color of the notes card
-
-        //holder.card.setBackgroundColor(Color.parseColor(notesCard.getColor()));
-        //Drawable res = context.getDrawable(R.drawable.rounded_corners);
-
         Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.rounded_corners);
         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
         DrawableCompat.setTint(wrappedDrawable, Color.parseColor(notesCard.getColor()));

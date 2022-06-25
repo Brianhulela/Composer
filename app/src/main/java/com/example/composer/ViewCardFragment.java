@@ -31,23 +31,35 @@ import java.util.ArrayList;
 
 public class ViewCardFragment extends Fragment {
 
-    String idFromCardClick;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    NotesCard notesCard;
-    NoteAdapter adapter;
+    // The activity hosting the Fragment
     AllNotesActivity allNotesActivity;
 
+    // From clicked card in the activity
+    String idFromCardClick;
+    NotesCard notesCard;
+
+    // The notes recyclerview
+    RecyclerView notesRecyclerView;
+    LinearLayoutManager notesHorizontalLayoutManager;
+    NoteAdapter adapter;
+
+    // Layout views
     TextInputEditText titleEdittext;
     ImageButton deleteCardImagebutton;
     ConstraintLayout viewConstraintLayout;
+    ImageButton addNoteButton;
 
     // For the color pallete
     ImageButton colorPalleteImagebutton;
     RecyclerView colorPalleteRecyclerview;
+    LinearLayoutManager colorPalleteLinearLayoutManager;
+    ColorPaletteAdapter colorPaletteAdapter;
     boolean palleteOpen = false;
 
     // For the checked notes
     RecyclerView checkedNotesRecyclerview;
+    LinearLayoutManager checkedNotesLayoutManager;
+    CheckedNotesRecyclerAdapter checkedNotesRecyclerAdapter;
 
     @Nullable
     @Override
@@ -95,15 +107,59 @@ public class ViewCardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Initialising the layout views
         titleEdittext = view.findViewById(R.id.notesTitleEdittext);
         viewConstraintLayout = view.findViewById(R.id.viewConstraintLayout);
+        deleteCardImagebutton = view.findViewById(R.id.deleteCardImagebutton);
+        colorPalleteImagebutton = view.findViewById(R.id.viewCardPalleteImagebutton);
+        addNoteButton = view.findViewById(R.id.createAddNoteButton);
 
+
+        // Getting the hosting activity of fragment
         allNotesActivity  = (AllNotesActivity) getActivity();
+
         //Get data from click
         getData();
         setCardColor();
 
-        deleteCardImagebutton = view.findViewById(R.id.deleteCardImagebutton);
+        //Setting up the color pallete recyclerview
+        colorPalleteRecyclerview = view.findViewById(R.id.viewCardPaletteRecyclerview);
+        colorPalleteLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        colorPalleteRecyclerview.setLayoutManager(colorPalleteLinearLayoutManager);
+        colorPaletteAdapter = new ColorPaletteAdapter(getContext(), viewConstraintLayout);
+        colorPalleteRecyclerview.setAdapter(colorPaletteAdapter);
+
+        //Setting up the notes RecyclerView
+        notesRecyclerView = view.findViewById(R.id.notesRecyclerview);
+        notesHorizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        notesRecyclerView.setLayoutManager(notesHorizontalLayoutManager);
+        adapter = new NoteAdapter(notesCard.getNotes(), getContext());
+
+        // Callback for the dragging and rearranging of the notes
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(notesRecyclerView);
+
+        notesRecyclerView.setAdapter(adapter);
+
+        // Setting up the checkedNotesRecyclerview
+        checkedNotesRecyclerview = view.findViewById(R.id.checkedNotesRecyclerview);
+        checkedNotesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        checkedNotesRecyclerview.setLayoutManager(checkedNotesLayoutManager);
+
+        // Making the checked notes arrayList
+        ArrayList<Note> checkedNotes = new ArrayList<>();
+        for (Note note : notesCard.getNotes()){
+            if (note.isChecked){
+                checkedNotes.add(note);
+            }
+        }
+
+        // Binding the checkedNotes to the checkedNotesRecyclerview;
+        checkedNotesRecyclerAdapter = new CheckedNotesRecyclerAdapter(getContext(), checkedNotes);
+        checkedNotesRecyclerview.setAdapter(checkedNotesRecyclerAdapter);
+
+        // Delete the notescard when delete button is clicked
         deleteCardImagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,15 +167,7 @@ public class ViewCardFragment extends Fragment {
             }
         });
 
-        //Setting up the color pallete tingz
-
-        colorPalleteRecyclerview = view.findViewById(R.id.viewCardPaletteRecyclerview);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        colorPalleteRecyclerview.setLayoutManager(linearLayoutManager);
-        ColorPaletteAdapter colorPaletteAdapter = new ColorPaletteAdapter(getContext(), viewConstraintLayout);
-        colorPalleteRecyclerview.setAdapter(colorPaletteAdapter);
-
-        colorPalleteImagebutton = view.findViewById(R.id.viewCardPalleteImagebutton);
+        // The onClickLister to show/close the color pallete
         colorPalleteImagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,23 +181,6 @@ public class ViewCardFragment extends Fragment {
         });
 
 
-        //Setting up the RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.notesRecyclerview);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        //recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
-        adapter = new NoteAdapter(notesCard.getNotes(), getContext());
-
-        ItemTouchHelper.Callback callback =
-                new ItemMoveCallback(adapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView.setAdapter(adapter);
-
-        ImageButton addNoteButton = view.findViewById(R.id.createAddNoteButton);
         addNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,20 +191,6 @@ public class ViewCardFragment extends Fragment {
             }
         });
 
-
-        // Setting up the checkedNotesRecyclerview
-        checkedNotesRecyclerview = view.findViewById(R.id.checkedNotesRecyclerview);
-        LinearLayoutManager checkedNotesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        checkedNotesRecyclerview.setLayoutManager(checkedNotesLayoutManager);
-        // Making the checked notes arrayList
-        ArrayList<Note> checkedNotes = new ArrayList<>();
-        for (Note note : notesCard.getNotes()){
-            if (note.isChecked){
-                checkedNotes.add(note);
-            }
-        }
-        CheckedNotesRecyclerAdapter checkedNotesRecyclerAdapter = new CheckedNotesRecyclerAdapter(getContext(), checkedNotes);
-        checkedNotesRecyclerview.setAdapter(checkedNotesRecyclerAdapter);
     }
 
     public void setCardColor(){
