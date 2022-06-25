@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1B1B1B">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/notesTitleEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Title"
+                android:inputType="textMultiLine|textCapSentences"
+                android:paddingStart="24dp"
+                android:paddingRight="24dp"
+                android:text="This is the first notes page and I'm enjoying coding it."
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewCardPaletteRecyclerview">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+            <ImageButton
+                android:id="@+id/createAddNoteButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="@+id/notesRecyclerview"
+                app:layout_constraintTop_toBottomOf="@+id/notesRecyclerview"
+                app:srcCompat="@drawable/ic_add_note" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notesRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/notesTitleEdittext" />
+
+            <ImageButton
+                android:id="@+id/deleteCardImagebutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@null"
+                app:layout_constraintBottom_toTopOf="@+id/viewCardPaletteRecyclerview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_delete" />
+
+            <ImageButton
+                android:id="@+id/viewCardPalleteImagebutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="1dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/deleteCardImagebutton"
+                app:layout_constraintEnd_toStartOf="@+id/deleteCardImagebutton"
+                app:layout_constraintTop_toTopOf="@+id/deleteCardImagebutton"
+                app:srcCompat="@drawable/ic_palette" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/viewCardPaletteRecyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/notesTitleEdittext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deleteCardImagebutton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
