@@ -1,13 +1,10 @@
 package com.example.composer;
 
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,8 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.divider.MaterialDivider;
 import com.google.android.material.textfield.TextInputEditText;
@@ -230,12 +225,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.viewHolder> im
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            noteText = itemView.findViewById(R.id.noteTextview);
+            noteText = itemView.findViewById(R.id.checkedNoteTextview);
             noteLayout = itemView.findViewById(R.id.noteLayout);
-            dragButton = itemView.findViewById(R.id.dragNoteButton);
-            noteCheckbox = itemView.findViewById(R.id.noteCheckbox);
-            deleteNoteImagebutton = itemView.findViewById(R.id.deleteNoteImagebutton);
-            indentDivider = itemView.findViewById(R.id.indentDivider);
+            dragButton = itemView.findViewById(R.id.checkedDragNoteButton);
+            noteCheckbox = itemView.findViewById(R.id.checkedNoteCheckbox);
+            deleteNoteImagebutton = itemView.findViewById(R.id.checkedDeleteNoteImagebutton);
+            indentDivider = itemView.findViewById(R.id.checkedIndentDivider);
         }
     }
 }

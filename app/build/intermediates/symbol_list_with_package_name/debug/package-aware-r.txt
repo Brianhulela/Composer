@@ -2766,6 +2766,12 @@ id chain2
 id chains
 id checkbox
 id checked
+id checkedDeleteNoteImagebutton
+id checkedDragNoteButton
+id checkedIndentDivider
+id checkedNoteCheckbox
+id checkedNoteTextview
+id checkedNotesRecyclerview
 id chronometer
 id circle_center
 id clear_text
@@ -2803,7 +2809,6 @@ id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
 id deleteCardImagebutton
-id deleteNoteImagebutton
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -2825,7 +2830,6 @@ id dragClockwise
 id dragDown
 id dragEnd
 id dragLeft
-id dragNoteButton
 id dragRight
 id dragStart
 id dragUp
@@ -2887,7 +2891,6 @@ id ignoreRequest
 id image
 id immediateStop
 id included
-id indentDivider
 id info
 id invisible
 id inward
@@ -2985,9 +2988,7 @@ id noState
 id none
 id normal
 id north
-id noteCheckbox
 id noteLayout
-id noteTextview
 id notesCardRecyclerview
 id notesCardTitleTextview
 id notesCardTitleTextview2
@@ -3285,6 +3286,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_all_notes
 layout cards_shimmer_layout
+layout checked_note
 layout color_palette_layout
 layout create_notes_card
 layout custom_dialog

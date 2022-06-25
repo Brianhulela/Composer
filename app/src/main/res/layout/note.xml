@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/dragNoteButton"
+            android:id="@+id/checkedDragNoteButton"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@null"
@@ -29,7 +29,7 @@
             app:strokeColor="#ffffff" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/noteTextview"
+            android:id="@+id/checkedNoteTextview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -39,22 +39,22 @@
             android:inputType="textMultiLine|textCapSentences"
             android:minHeight="60dp"
             android:paddingTop="16dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/noteCheckbox"
-            app:layout_constraintEnd_toStartOf="@+id/deleteNoteImagebutton"
+            app:layout_constraintBaseline_toBaselineOf="@+id/checkedNoteCheckbox"
+            app:layout_constraintEnd_toStartOf="@+id/checkedDeleteNoteImagebutton"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/noteCheckbox" />
+            app:layout_constraintStart_toEndOf="@+id/checkedNoteCheckbox" />
 
 
         <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/noteCheckbox"
+            android:id="@+id/checkedNoteCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/dragNoteButton"
-            app:layout_constraintStart_toEndOf="@+id/dragNoteButton"
-            app:layout_constraintTop_toTopOf="@+id/dragNoteButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/checkedDragNoteButton"
+            app:layout_constraintStart_toEndOf="@+id/checkedDragNoteButton"
+            app:layout_constraintTop_toTopOf="@+id/checkedDragNoteButton" />
 
         <ImageButton
-            android:id="@+id/deleteNoteImagebutton"
+            android:id="@+id/checkedDeleteNoteImagebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -63,21 +63,21 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/noteTextview"
+            app:layout_constraintStart_toEndOf="@+id/checkedNoteTextview"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_delete" />
 
         <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/indentDivider"
+            android:id="@+id/checkedIndentDivider"
             android:layout_width="16dp"
             android:layout_height="1dp"
             android:layout_marginEnd="16dp"
             android:background="?android:attr/listDivider"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/dragNoteButton"
-            app:layout_constraintEnd_toEndOf="@+id/dragNoteButton"
-            app:layout_constraintStart_toStartOf="@+id/dragNoteButton"
-            app:layout_constraintTop_toTopOf="@+id/dragNoteButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/checkedDragNoteButton"
+            app:layout_constraintEnd_toEndOf="@+id/checkedDragNoteButton"
+            app:layout_constraintStart_toStartOf="@+id/checkedDragNoteButton"
+            app:layout_constraintTop_toTopOf="@+id/checkedDragNoteButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

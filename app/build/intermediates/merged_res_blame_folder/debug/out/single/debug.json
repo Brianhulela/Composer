@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
+        "merged": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-merged_res-31:\\layout_checked_note.xml.flat",
+        "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\layout\\checked_note.xml"
+    },
+    {
         "merged": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-merged_res-31:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
@@ -64,6 +68,10 @@
         "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.composer.app-merged_res-31:/layout_checked_note.xml.flat",
+        "source": "com.example.composer.app-main-33:/layout/checked_note.xml"
+    },
+    {
         "merged": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-merged_res-31:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
@@ -90,10 +98,6 @@
     {
         "merged": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-merged_res-31:\\layout_note.xml.flat",
         "source": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-main-33:\\layout\\note.xml"
-    },
-    {
-        "merged": "com.example.composer.app-merged_res-31:/layout_notes_card.xml.flat",
-        "source": "com.example.composer.app-main-33:/layout/notes_card.xml"
     },
     {
         "merged": "C:\\Users\\Brian\\.gradle\\daemon\\7.3.3\\com.example.composer.app-merged_res-31:\\layout_view_note_fragment.xml.flat",

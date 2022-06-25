@@ -23,6 +23,12 @@ id addNoteCardButton
 id allNotesLayout
 id card
 id cardsShimmer
+id checkedDeleteNoteImagebutton
+id checkedDragNoteButton
+id checkedIndentDivider
+id checkedNoteCheckbox
+id checkedNoteTextview
+id checkedNotesRecyclerview
 id colorButton
 id colorPaletteImagebutton
 id containerLayout
@@ -31,16 +37,11 @@ id createCardConstraintlayout
 id createCardRecyclerview
 id createCardTitleEdittext
 id deleteCardImagebutton
-id deleteNoteImagebutton
 id discardNoteCardButton
-id dragNoteButton
 id editImagebutton
 id frameLayout
-id indentDivider
 id newNotesFAB
-id noteCheckbox
 id noteLayout
-id noteTextview
 id notesCardRecyclerview
 id notesCardTitleTextview
 id notesCardTitleTextview2
@@ -59,6 +60,7 @@ id viewCardPalleteImagebutton
 id viewConstraintLayout
 layout activity_all_notes
 layout cards_shimmer_layout
+layout checked_note
 layout color_palette_layout
 layout create_notes_card
 layout note

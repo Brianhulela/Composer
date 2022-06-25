@@ -3,27 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/drawable-v24/ic_drag.xml" value="0.1" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/drawable/ic_add_note.xml" value="0.184" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/drawable/ic_delete.xml" value="0.173" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/drawable/ic_palette.xml" value="0.184" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/activity_all_notes.xml" value="0.22" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/card_note.xml" value="0.1" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/cards_shimmer_layout.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/color_palette_layout.xml" value="0.6666666666666666" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/create_notes_card.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/checked_note.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/note.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/notes_card.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/view_note_activity.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/view_note_fragment.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Brian/AndroidStudioProjects/composer/app/src/main/res/layout/view_note_fragment.xml" value="0.22" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

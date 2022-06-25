@@ -44,6 +44,9 @@ public class ViewCardFragment extends Fragment {
     RecyclerView colorPalleteRecyclerview;
     boolean palleteOpen = false;
 
+    // For the checked notes
+    RecyclerView checkedNotesRecyclerview;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -154,6 +157,14 @@ public class ViewCardFragment extends Fragment {
                 allNotesActivity.notesCardsRecyclerAdapter.notifyItemChanged(notesCard.getPosition());
             }
         });
+
+
+        // Setting up the checkedNotesRecyclerview
+        checkedNotesRecyclerview = view.findViewById(R.id.checkedNotesRecyclerview);
+        LinearLayoutManager checkedNotesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        checkedNotesRecyclerview.setLayoutManager(checkedNotesLayoutManager);
+        CheckedNotesRecyclerAdapter checkedNotesRecyclerAdapter = new CheckedNotesRecyclerAdapter(getContext(), notesCard.getNotes());
+        checkedNotesRecyclerview.setAdapter(checkedNotesRecyclerAdapter);
     }
 
     public void setCardColor(){
