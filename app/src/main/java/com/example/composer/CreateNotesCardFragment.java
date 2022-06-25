@@ -206,6 +206,11 @@ public class CreateNotesCardFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        // Close the fragment after adding to firebase
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        if(fm.getBackStackEntryCount()>0) {
+                            fm.popBackStack();
+                        }
                         allNotesActivity.notesFirebaseHandler.getDataFromFirestore();
                         Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
@@ -218,11 +223,5 @@ public class CreateNotesCardFragment extends Fragment {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
-        // Close the fragment after adding to firebase
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        if(fm.getBackStackEntryCount()>0) {
-            fm.popBackStack();
-        }
     }
 }
