@@ -55,6 +55,7 @@ id notesCardTitleTextview9
 id notesRecyclerview
 id notesTitleEdittext
 id showColorPaletteRecyclerview
+id textView
 id viewCardPaletteRecyclerview
 id viewCardPalleteImagebutton
 id viewConstraintLayout

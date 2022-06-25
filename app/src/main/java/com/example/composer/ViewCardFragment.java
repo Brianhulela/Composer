@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class ViewCardFragment extends Fragment {
 
     String idFromCardClick;
@@ -163,7 +165,14 @@ public class ViewCardFragment extends Fragment {
         checkedNotesRecyclerview = view.findViewById(R.id.checkedNotesRecyclerview);
         LinearLayoutManager checkedNotesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         checkedNotesRecyclerview.setLayoutManager(checkedNotesLayoutManager);
-        CheckedNotesRecyclerAdapter checkedNotesRecyclerAdapter = new CheckedNotesRecyclerAdapter(getContext(), notesCard.getNotes());
+        // Making the checked notes arrayList
+        ArrayList<Note> checkedNotes = new ArrayList<>();
+        for (Note note : notesCard.getNotes()){
+            if (note.isChecked){
+                checkedNotes.add(note);
+            }
+        }
+        CheckedNotesRecyclerAdapter checkedNotesRecyclerAdapter = new CheckedNotesRecyclerAdapter(getContext(), checkedNotes);
         checkedNotesRecyclerview.setAdapter(checkedNotesRecyclerAdapter);
     }
 

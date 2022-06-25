@@ -1,6 +1,7 @@
 package com.example.composer;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,10 @@ public class CheckedNotesRecyclerAdapter extends RecyclerView.Adapter<CheckedNot
     public void onBindViewHolder(@NonNull CheckedNotesRecyclerAdapter.ViewHolder holder, int position) {
         Note note = data.get(holder.getAdapterPosition());
         holder.checkedNoteTextview.setText(note.getNoteText());
+        holder.checkedNoteTextview.setPaintFlags(holder.checkedNoteTextview.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+        holder.checkedNoteCheckbox.setChecked(note.isChecked);
+
 
     }
 
